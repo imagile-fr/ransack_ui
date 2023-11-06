@@ -1,6 +1,14 @@
 # Extend original ransack adapter first
-require 'ransack/constants'
-require 'ransack/adapters/active_record'
+require 'ransack'
 
-require 'ransack_ui/adapters/active_record/base'
-ActiveRecord::Base.extend RansackUI::Adapters::ActiveRecord::Base
+module RansackUI
+  module Adapters
+    module ActiveRecord
+      module Base
+        def self.extended(base)
+          ::ActiveRecord::Base.extend(::Ransack::Adapters::ActiveRecord::Base)
+        end
+      end
+    end
+  end
+end
